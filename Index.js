@@ -1,17 +1,18 @@
+// server.js
 const express = require('express');
-const path = require('path');
+const multer = require('multer');
 
 const app = express();
-const PORT = process.env.PORT || 3000; // <-- utilise le port dynamique si dispo
+const upload = multer({ dest: 'uploads/' });
 
-// Servir le dossier public
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Route principale
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html')); // <- mieux mettre index.html dans public
+  res.send('Hello World!');
 });
 
-app.listen(PORT, () => {
-  console.log(`Serveur lancé sur le port ${PORT}`);
+app.post('/upload', upload.single('file'), (req, res) => {
+  res.send('Fichier reçu !');
+});
+
+app.listen(3000, () => {
+  console.log('Serveur lancé sur http://localhost:3000');
 });
