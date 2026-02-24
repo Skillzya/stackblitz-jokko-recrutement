@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rejoignez Jokko - Recrutement</title>
+  <meta name="description" content="Postulez chez Jokko - Plateforme de recrutement moderne et accessible" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #FF6B00;
+      --primary-dark: #E85D00;
+      --primary-light: #FF8C33;
+      --bg-dark: #0D0D0D;
+      --bg-card: #1A1A1A;
+      --text-primary: #FFFFFF;
+      --text-secondary: #A0A0A0;
+      --success: #00D9A3;
+      --error: #FF4757;
+      --border: #2A2A2A;
+    }
+
+    /* Animations utilitaires */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(30px, -30px) rotate(5deg); }
+      66% { transform: translate(-20px, 20px) rotate(-5deg); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes progressFill {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* Classes utilitaires d'animation */
+    .animate-fade-in {
+      animation: fadeIn 0.5s ease-out both;
+    }
+
+    .animate-fade-in-down {
+      animation: fadeInDown 0.8s ease-out both;
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out both;
+    }
+
+    .animate-slide-in {
+      animation: slideIn 0.5s ease-out both;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 107, 0, 0.05) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .logo {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 3.5em;
+      font-weight: 900;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .tagline {
+      font-size: 1.3em;
+      color: var(--text-secondary);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .tagline strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    /* Progress steps amélioré */
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      padding: 0 20px;
+    }
+
+    .step {
+      flex: 1;
+      text-align: center;
+      position: relative;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: var(--border);
+      z-index: -1;
+      transition: background 0.4s ease;
+    }
+
+    .step:first-child::before {
+      display: none;
+    }
+
+    /* Barre de progression animée */
+    .step.completed::before {
+      background: var(--success);
+      animation: progressFill 0.6s ease-out;
+    }
+
+    .step-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      margin: 0 auto 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85em;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    /* Micro-interaction sur hover */
+    .step.completed .step-circle:hover {
+      transform: scale(1.15) rotate(10deg);
+      box-shadow: 0 0 0 6px rgba(0, 217, 163, 0.2);
+    }
+
+    .step.active .step-circle {
+      background: var(--primary);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.2);
+      transform: scale(1.1);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    .step.completed .step-circle {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .step.completed .step-circle::before {
+      content: '✓';
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .step-label {
+      font-size: 0.75em;
+      color: var(--text-secondary);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.3s ease;
+    }
+
+    .step.active .step-label {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .step.completed .step-label {
+      color: var(--success);
+    }
+
+    /* Form card */
+    .form-card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      padding: 50px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border);
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+
+    .section-title {
+      font-size: 1.8em;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+    }
+
+    .section-subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 35px;
+      font-size: 1.05em;
+    }
+
+    /* Form groups avec accessibilité améliorée */
+    .form-group {
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--text-primary);
+      font-weight: 600;
+      font-size: 0.95em;
+      letter-spacing: 0.3px;
+    }
+
+    .required {
+      color: var(--primary);
+      margin-left: 4px;
+    }
+
+    .optional {
+      color: var(--text-secondary);
+      font-weight: 400;
+      font-size: 0.85em;
+      margin-left: 6px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"] {
+      width: 100%;
+      padding: 16px 50px 16px 20px;
+      background: var(--bg-dark);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      color: var(--text-primary);
+      font-size: 1em;
+      font-family: 'DM Sans', sans-serif;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: var(--bg-card);
+      box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    input.valid {
+      border-color: var(--success);
+    }
+
+    input.invalid {
+      border-color: var(--error);
+    }
+
+    /* Validation messages améliorés pour accessibilité */
+    .validation-message {
+      display: none;
+      font-size: 0.85em;
+      margin-top: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: rgba(255, 71, 87, 0.1);
+    }
+
+    .validation-message.show {
+      display: block;
+    }
+
+    .validation-message.error {
+      color: var(--error);
+      background: rgba(255, 71, 87, 0.1);
+    }
+
+    .validation-message.success {
+      color: var(--success);
+      background: rgba(0, 217, 163, 0.1);
+    }
+
+    /* Check icon avec micro-animation */
+    .input-wrapper {
+      position: relative;
+    }
+
+    .check-icon {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%) scale(0);
+      color: var(--success);
+      font-size: 1.2em;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .check-icon.show {
+      opacity: 1;
+      transform: translateY(-50%) scale(1);
+    }
+
+    /* File upload amélioré */
+    .file-upload-zone {
+      position: relative;
+      background: var(--bg-dark);
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .file-upload-zone:hover {
+      border-color: var(--primary);
+      background: rgba(255, 107, 0, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .file-upload-zone.dragover {
+      border-color: var(--primary);
+      background: rgba(255, 107, 0, 0.1);
+      transform: scale(1.02);
+      box-shadow: 0 0 0 4px rgba(255, 107, 0, 0.2);
+    }
+
+    .file-upload-zone.has-file {
+      border-style: solid;
+      border-color: var(--success);
+      background: rgba(0, 217, 163, 0.05);
+    }
+
+    /* État d'erreur pour le fichier */
+    .file-upload-zone.error {
+      border-style: solid;
+      border-color: var(--error);
+      background: rgba(255, 71, 87, 0.05);
+    }
+
+    input[type="file"] {
+      position: absolute;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .upload-icon {
+      font-size: 3em;
+      margin-bottom: 15px;
+      opacity: 0.5;
+      transition: all 0.3s ease;
+    }
+
+    .file-upload-zone:hover .upload-icon {
+      opacity: 1;
+      transform: translateY(-5px);
+    }
+
+    .upload-text {
+      font-size: 1.05em;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .upload-text strong {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .upload-hint {
+      font-size: 0.85em;
+      color: var(--text-secondary);
+    }
+
+    /* Message d'erreur fichier */
+    .file-error-message {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: rgba(255, 71, 87, 0.1);
+      border-left: 3px solid var(--error);
+      border-radius: 6px;
+      color: var(--error);
+      font-size: 0.9em;
+    }
+
+    .file-error-message.show {
+      display: block;
+    }
+
+    .file-info {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      background: rgba(0, 217, 163, 0.1);
+      border-radius: 8px;
+    }
+
+    .file-info.show {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .file-icon {
+      font-size: 1.8em;
+    }
+
+    .file-details {
+      flex: 1;
+      text-align: left;
+    }
+
+    .file-name {
+      color: var(--success);
+      font-weight: 600;
+      font-size: 0.95em;
+      word-break: break-all;
+    }
+
+    .file-size {
+      color: var(--text-secondary);
+      font-size: 0.8em;
+      margin-top: 2px;
+    }
+
+    .remove-file {
+      background: none;
+      border: none;
+      color: var(--error);
+      cursor: pointer;
+      padding: 8px;
+      font-size: 1.5em;
+      line-height: 1;
+      transition: all 0.2s ease;
+    }
+
+    .remove-file:hover {
+      transform: scale(1.3) rotate(90deg);
+    }
+
+    /* Navigation buttons */
+    .form-navigation {
+      display: flex;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.05em;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: 0 4px 20px rgba(255, 107, 0, 0.3);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(255, 107, 0, 0.4);
+    }
+
+    .btn-primary:active:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: var(--bg-dark);
+      color: var(--text-secondary);
+      border: 2px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--border);
+      color: var(--text-primary);
+      transform: translateY(-2px);
+    }
+
+    /* Success screen */
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .success-screen.show {
+      display: block;
+    }
+
+    .success-icon {
+      font-size: 5em;
+      margin-bottom: 25px;
+      animation: bounce 0.6s ease-out;
+    }
+
+    .success-title {
+      font-size: 2.2em;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--success);
+    }
+
+    .success-message {
+      font-size: 1.15em;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .success-details {
+      background: var(--bg-dark);
+      padding: 25px;
+      border-radius: 12px;
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      color: var(--text-secondary);
+      font-size: 0.9em;
+    }
+
+    .detail-value {
+      color: var(--text-primary);
+      font-weight: 600;
+      text-align: right;
+    }
+
+    /* Loading state */
+    .loading-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(13, 13, 13, 0.95);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loading-overlay.show {
+      display: flex;
+    }
+
+    .loading-content {
+      text-align: center;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px;
+    }
+
+    .loading-text {
+      font-size: 1.2em;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Responsive optimisé */
+    @media (max-width: 768px) {
+      body {
+        padding: 15px 10px;
+      }
+
+      .logo {
+        font-size: 2.5em;
+      }
+
+      .tagline {
+        font-size: 1.05em;
+      }
+
+      .form-card {
+        padding: 25px 20px;
+        border-radius: 16px;
+      }
+
+      .section-title {
+        font-size: 1.4em;
+      }
+
+      .section-subtitle {
+        font-size: 0.95em;
+      }
+
+      .progress-steps {
+        padding: 0 5px;
+      }
+
+      .step-label {
+        font-size: 0.6em;
+      }
+
+      .step-circle {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75em;
+      }
+
+      .btn {
+        font-size: 0.9em;
+        padding: 14px;
+      }
+
+      .file-upload-zone {
+        padding: 30px 20px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="url"] {
+        padding: 14px 45px 14px 16px;
+        font-size: 0.95em;
+      }
+    }
+
+    /* Focus visible pour accessibilité clavier */
+    *:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    /* Skip to content pour accessibilité */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--primary);
+      color: white;
+      padding: 8px;
+      text-decoration: none;
+      z-index: 100;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Skip link pour accessibilité -->
+<a href="#main-form" class="skip-link">Aller au formulaire</a>
+
+<div class="container">
+  <!-- Header -->
+  <header class="header animate-fade-in-down">
+    <h1 class="logo">JOKKO</h1>
+    <p class="tagline">Construisons ensemble <strong>votre avenir</strong></p>
+  </header>
+
+  <!-- Progress Steps -->
+  <nav class="progress-steps animate-fade-in" aria-label="Progression du formulaire" style="animation-delay: 0.3s;">
+    <div class="step active" data-step="1" role="status" aria-label="Étape 1 : Identité">
+      <div class="step-circle" aria-current="step">1</div>
+      <div class="step-label">Identité</div>
+    </div>
+    <div class="step" data-step="2" role="status" aria-label="Étape 2 : Contact">
+      <div class="step-circle">2</div>
+      <div class="step-label">Contact</div>
+    </div>
+    <div class="step" data-step="3" role="status" aria-label="Étape 3 : CV">
+      <div class="step-circle">3</div>
+      <div class="step-label">CV</div>
+    </div>
+    <div class="step" data-step="4" role="status" aria-label="Étape 4 : Profil">
+      <div class="step-circle">4</div>
+      <div class="step-label">Profil</div>
+    </div>
+  </nav>
+
+  <!-- Form Card -->
+  <main class="form-card animate-fade-in-up" id="main-form" style="animation-delay: 0.5s;">
+    <form id="candidatureForm" action="/postuler" method="POST" enctype="multipart/form-data" novalidate>
+     
+      <!-- Section 1: Identité -->
+      <section class="form-section active" data-section="1" aria-labelledby="section-title-1">
+        <h2 class="section-title" id="section-title-1">Qui êtes-vous ?</h2>
+        <p class="section-subtitle">Commençons par faire connaissance</p>
+
+        <div class="form-group">
+          <label for="prenom">Prénom <span class="required" aria-label="requis">*</span></label>
+          <div class="input-wrapper">
+            <input
+              type="text"
+              name="prenom"
+              id="prenom"
+              placeholder="Votre prénom"
+              required
+              aria-required="true"
+              aria-describedby="prenom-error"
+              autocomplete="given-name"
+            />
+            <span class="check-icon" aria-hidden="true">✓</span>
+          </div>
+          <div class="validation-message" id="prenom-error" role="alert"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="nom">Nom <span class="required" aria-label="requis">*</span></label>
+          <div class="input-wrapper">
+            <input
+              type="text"
+              name="nom"
+              id="nom"
+              placeholder="Votre nom"
+              required
+              aria-required="true"
+              aria-describedby="nom-error"
+              autocomplete="family-name"
+            />
+            <span class="check-icon" aria-hidden="true">✓</span>
+          </div>
+          <div class="validation-message" id="nom-error" role="alert"></div>
+        </div>
+
+        <div class="form-navigation">
+          <button type="button" class="btn btn-primary" onclick="nextSection(2)" aria-label="Passer à l'étape suivante">
+            Suivant
+          </button>
+        </div>
+      </section>
+
+      <!-- Section 2: Contact -->
+      <section class="form-section" data-section="2" aria-labelledby="section-title-2">
+        <h2 class="section-title" id="section-title-2">Comment vous joindre ?</h2>
+        <p class="section-subtitle">Vos coordonnées restent confidentielles</p>
+
+        <div class="form-group">
+          <label for="email">Email <span class="required" aria-label="requis">*</span></label>
+          <div class="input-wrapper">
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="votre.email@exemple.com"
+              required
+              aria-required="true"
+              aria-describedby="email-error"
+              autocomplete="email"
+            />
+            <span class="check-icon" aria-hidden="true">✓</span>
+          </div>
+          <div class="validation-message" id="email-error" role="alert"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="telephone">Téléphone <span class="required" aria-label="requis">*</span></label>
+          <div class="input-wrapper">
+            <input
+              type="tel"
+              name="telephone"
+              id="telephone"
+              placeholder="+221 77 123 45 67"
+              required
+              aria-required="true"
+              aria-describedby="telephone-error telephone-hint"
+              autocomplete="tel"
+            />
+            <span class="check-icon" aria-hidden="true">✓</span>
+          </div>
+          <div class="validation-message" id="telephone-error" role="alert"></div>
+          <div id="telephone-hint" style="font-size: 0.85em; color: var(--text-secondary); margin-top: 6px;">
+            Format attendu : +221 suivi de 9 chiffres
+          </div>
+        </div>
+
+        <div class="form-navigation">
+          <button type="button" class="btn btn-secondary" onclick="prevSection(1)" aria-label="Revenir à l'étape précédente">
+            Précédent
+          </button>
+          <button type="button" class="btn btn-primary" onclick="nextSection(3)" aria-label="Passer à l'étape suivante">
+            Suivant
+          </button>
+        </div>
+      </section>
+
+      <!-- Section 3: CV -->
+      <section class="form-section" data-section="3" aria-labelledby="section-title-3">
+        <h2 class="section-title" id="section-title-3">Votre parcours</h2>
+        <p class="section-subtitle">Partagez votre CV avec nous</p>
+
+        <div class="form-group">
+          <label for="cvFile">CV <span class="required" aria-label="requis">*</span></label>
+          <div class="file-upload-zone" id="fileZone" role="button" tabindex="0" aria-describedby="file-instructions">
+            <input
+              type="file"
+              name="cv"
+              id="cvFile"
+              accept=".pdf,application/pdf"
+              required
+              aria-required="true"
+              aria-describedby="file-error"
+            />
+            <div class="upload-icon" aria-hidden="true">📄</div>
+            <div class="upload-text">
+              <strong>Cliquez pour choisir</strong> ou glissez-déposez
+            </div>
+            <div class="upload-hint" id="file-instructions">Format PDF uniquement · Max 10 Mo</div>
+          </div>
+          <div class="file-error-message" id="file-error" role="alert"></div>
+          <div class="file-info" id="fileInfo">
+            <div class="file-icon" aria-hidden="true">📄</div>
+            <div class="file-details">
+              <div class="file-name" id="fileName"></div>
+              <div class="file-size" id="fileSize"></div>
+            </div>
+            <button type="button" class="remove-file" onclick="removeFile()" aria-label="Supprimer le fichier">×</button>
+          </div>
+        </div>
+
+        <div class="form-navigation">
+          <button type="button" class="btn btn-secondary" onclick="prevSection(2)" aria-label="Revenir à l'étape précédente">
+            Précédent
+          </button>
+          <button type="button" class="btn btn-primary" onclick="nextSection(4)" aria-label="Passer à l'étape suivante">
+            Suivant
+          </button>
+        </div>
+      </section>
+
+      <!-- Section 4: Profil en ligne -->
+      <section class="form-section" data-section="4" aria-labelledby="section-title-4">
+        <h2 class="section-title" id="section-title-4">Votre présence en ligne</h2>
+        <p class="section-subtitle">Facultatif mais recommandé</p>
+
+        <div class="form-group">
+          <label for="linkedin">LinkedIn <span class="optional">(facultatif)</span></label>
+          <div class="input-wrapper">
+            <input
+              type="url"
+              name="linkedin"
+              id="linkedin"
+              placeholder="https://linkedin.com/in/votre-profil"
+              aria-describedby="linkedin-error"
+              autocomplete="url"
+            />
+            <span class="check-icon" aria-hidden="true">✓</span>
+          </div>
+          <div class="validation-message" id="linkedin-error" role="alert"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="portfolio">Portfolio / Site Web <span class="optional">(facultatif)</span></label>
+          <div class="input-wrapper">
+            <input
+              type="url"
+              name="portfolio"
+              id="portfolio"
+              placeholder="https://votre-portfolio.com"
+              aria-describedby="portfolio-error"
+              autocomplete="url"
+            />
+            <span class="check-icon" aria-hidden="true">✓</span>
+          </div>
+          <div class="validation-message" id="portfolio-error" role="alert"></div>
+        </div>
+
+        <div class="form-navigation">
+          <button type="button" class="btn btn-secondary" onclick="prevSection(3)" aria-label="Revenir à l'étape précédente">
+            Précédent
+          </button>
+          <button type="submit" class="btn btn-primary" id="submitBtn" aria-label="Envoyer ma candidature">
+            Envoyer ma candidature
+          </button>
+        </div>
+      </section>
+
+    </form>
+
+    <!-- Success Screen -->
+    <div class="success-screen" id="successScreen" role="status" aria-live="polite">
+      <div class="success-icon" aria-hidden="true">🎉</div>
+      <h2 class="success-title">Candidature envoyée !</h2>
+      <p class="success-message">
+        Merci pour votre intérêt pour Jokko. Nous avons bien reçu votre candidature
+        et notre équipe l'examinera attentivement. Vous recevrez une réponse sous 7 jours ouvrés.
+      </p>
+      <div class="success-details" id="successDetails"></div>
+    </div>
+  </main>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay" role="status" aria-live="polite" aria-label="Envoi en cours">
+  <div class="loading-content">
+    <div class="spinner" aria-hidden="true"></div>
+    <div class="loading-text">Envoi en cours...</div>
+  </div>
+</div>
+
+<script>
+  let currentSection = 1;
+
+  // Configuration de validation téléphone Sénégal
+  const SENEGAL_PHONE_REGEX = /^\+221\s?(7[0-8]|3[0-9])\s?\d{3}\s?\d{2}\s?\d{2}$/;
+
+  // Navigation entre sections
+  function nextSection(section) {
+    if (validateCurrentSection()) {
+      updateProgress(section);
+      showSection(section);
+    }
+  }
+
+  function prevSection(section) {
+    updateProgress(section);
+    showSection(section);
+  }
+
+  function showSection(section) {
+    const sections = document.querySelectorAll('.form-section');
+    sections.forEach(s => {
+      s.classList.remove('active');
+      s.classList.remove('animate-slide-in');
+    });
+   
+    const targetSection = document.querySelector(`.form-section[data-section="${section}"]`);
+    targetSection.classList.add('active');
+    targetSection.classList.add('animate-slide-in');
+   
+    currentSection = section;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+   
+    // Focus sur le premier champ de la nouvelle section
+    setTimeout(() => {
+      const firstInput = targetSection.querySelector('input');
+      if (firstInput) firstInput.focus();
+    }, 300);
+  }
+
+  function updateProgress(section) {
+    document.querySelectorAll('.step').forEach(step => {
+      const stepNum = parseInt(step.dataset.step);
+      step.classList.remove('active', 'completed');
+     
+      const circle = step.querySelector('.step-circle');
+      circle.removeAttribute('aria-current');
+     
+      if (stepNum === section) {
+        step.classList.add('active');
+        circle.setAttribute('aria-current', 'step');
+      } else if (stepNum < section) {
+        step.classList.add('completed');
+      }
+    });
+  }
+
+  // Validation améliorée
+  function validateCurrentSection() {
+    const section = document.querySelector(`.form-section[data-section="${currentSection}"]`);
+    const inputs = section.querySelectorAll('input[required], input[type="file"][required]');
+    let isValid = true;
+    let firstInvalidInput = null;
+
+    inputs.forEach(input => {
+      if (!validateInput(input)) {
+        isValid = false;
+        if (!firstInvalidInput) firstInvalidInput = input;
+      }
+    });
+
+    if (!isValid && firstInvalidInput) {
+      firstInvalidInput.focus();
+    }
+
+    return isValid;
+  }
+
+  function validateInput(input) {
+    const value = input.value.trim();
+    const wrapper = input.closest('.input-wrapper') || input.closest('.form-group');
+    const messageId = input.getAttribute('aria-describedby')?.split(' ')[0];
+    const message = messageId ? document.getElementById(messageId) : wrapper.querySelector('.validation-message');
+    const checkIcon = wrapper.querySelector('.check-icon');
+
+    let isValid = true;
+    let errorMsg = '';
+
+    // Validation selon le type
+    if (input.required && !value && input.type !== 'file') {
+      isValid = false;
+      errorMsg = 'Ce champ est requis';
+    } else if (input.type === 'email' && value) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) {
+        isValid = false;
+        errorMsg = 'Veuillez entrer une adresse email valide';
+      }
+    } else if (input.type === 'tel' && value) {
+      // Validation spécifique Sénégal
+      if (!SENEGAL_PHONE_REGEX.test(value)) {
+        isValid = false;
+        errorMsg = 'Format invalide. Utilisez +221 suivi de 9 chiffres (ex: +221 77 123 45 67)';
+      }
+    } else if (input.type === 'url' && value) {
+      try {
+        const url = new URL(value);
+        if (!['http:', 'https:'].includes(url.protocol)) {
+          throw new Error();
+        }
+      } catch {
+        isValid = false;
+        errorMsg = 'Veuillez entrer une URL valide commençant par http:// ou https://';
+      }
+    } else if (input.type === 'file' && input.required) {
+      if (!input.files || !input.files[0]) {
+        isValid = false;
+        errorMsg = 'Veuillez télécharger votre CV';
+      }
+    }
+
+    // Mise à jour de l'accessibilité
+    input.classList.remove('valid', 'invalid');
+    input.removeAttribute('aria-invalid');
+   
+    if (message) {
+      message.classList.remove('show', 'error', 'success');
+    }
+
+    if (value || (input.type === 'file' && input.files?.length)) {
+      if (isValid) {
+        input.classList.add('valid');
+        input.setAttribute('aria-invalid', 'false');
+        if (checkIcon) checkIcon.classList.add('show');
+      } else {
+        input.classList.add('invalid');
+        input.setAttribute('aria-invalid', 'true');
+        if (checkIcon) checkIcon.classList.remove('show');
+        if (message) {
+          message.textContent = errorMsg;
+          message.classList.add('show', 'error');
+        }
+      }
+    } else {
+      if (checkIcon) checkIcon.classList.remove('show');
+    }
+
+    return isValid;
+  }
+
+  // Validation en temps réel
+  document.querySelectorAll('input:not([type="file"])').forEach(input => {
+    input.addEventListener('blur', () => validateInput(input));
+    input.addEventListener('input', () => {
+      if (input.classList.contains('invalid')) {
+        validateInput(input);
+      }
+    });
+  });
+
+  // Gestion améliorée du fichier CV
+  const fileZone = document.getElementById('fileZone');
+  const fileInput = document.getElementById('cvFile');
+  const fileInfo = document.getElementById('fileInfo');
+  const fileName = document.getElementById('fileName');
+  const fileSize = document.getElementById('fileSize');
+  const fileError = document.getElementById('file-error');
+
+  fileInput.addEventListener('change', handleFile);
+
+  // Accessibilité clavier pour la zone de fichier
+  fileZone.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      fileInput.click();
+    }
+  });
+
+  // Drag and drop avec feedback visuel
+  fileZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    fileZone.classList.add('dragover');
+  });
+
+  fileZone.addEventListener('dragleave', () => {
+    fileZone.classList.remove('dragover');
+  });
+
+  fileZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    fileZone.classList.remove('dragover');
+   
+    if (e.dataTransfer.files.length) {
+      fileInput.files = e.dataTransfer.files;
+      handleFile();
+    }
+  });
+
+  function handleFile() {
+    const file = fileInput.files[0];
+    fileZone.classList.remove('error');
+    fileError.classList.remove('show');
+    fileError.textContent = '';
+
+    if (file) {
+      // Validation du type
+      if (file.type !== 'application/pdf') {
+        showFileError('Seuls les fichiers PDF sont acceptés');
+        fileInput.value = '';
+        return;
+      }
+
+      // Validation de la taille (10 Mo)
+      if (file.size > 10 * 1024 * 1024) {
+        showFileError('Le fichier est trop volumineux. Taille maximum : 10 Mo');
+        fileInput.value = '';
+        return;
+      }
+
+      // Afficher les infos du fichier
+      fileName.textContent = file.name;
+      fileSize.textContent = formatFileSize(file.size);
+      fileZone.classList.add('has-file');
+      fileInfo.classList.add('show');
+      fileInfo.classList.add('animate-fade-in');
+     
+      // Annoncer pour les lecteurs d'écran
+      const announcement = document.createElement('div');
+      announcement.setAttribute('role', 'status');
+      announcement.setAttribute('aria-live', 'polite');
+      announcement.style.position = 'absolute';
+      announcement.style.left = '-10000px';
+      announcement.textContent = `Fichier ${file.name} sélectionné avec succès`;
+      document.body.appendChild(announcement);
+      setTimeout(() => announcement.remove(), 1000);
+    }
+  }
+
+  function showFileError(message) {
+    fileZone.classList.add('error');
+    fileError.textContent = message;
+    fileError.classList.add('show');
+    fileError.classList.add('animate-fade-in');
+  }
+
+  function removeFile() {
+    fileInput.value = '';
+    fileZone.classList.remove('has-file', 'error');
+    fileInfo.classList.remove('show');
+    fileError.classList.remove('show');
+    fileInput.focus();
+  }
+
+  function formatFileSize(bytes) {
+    if (bytes < 1024) return bytes + ' o';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' Ko';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' Mo';
+  }
+
+  // Auto-format URLs
+  function formatURL(input) {
+    let value = input.value.trim();
+    if (value && !value.startsWith('http://') && !value.startsWith('https://')) {
+      input.value = 'https://' + value;
+      validateInput(input);
+    }
+  }
+
+  document.getElementById('linkedin')?.addEventListener('blur', function() {
+    if (this.value.trim()) formatURL(this);
+  });
+
+  document.getElementById('portfolio')?.addEventListener('blur', function() {
+    if (this.value.trim()) formatURL(this);
+  });
+
+  // Soumission du formulaire avec fetch
+  const form = document.getElementById('candidatureForm');
+  const loadingOverlay = document.getElementById('loadingOverlay');
+  const successScreen = document.getElementById('successScreen');
+  const successDetails = document.getElementById('successDetails');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    if (!validateCurrentSection()) {
+      return;
+    }
+
+    loadingOverlay.classList.add('show');
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+
+    try {
+      const formDataObj = new FormData(form);
+     
+      // Envoi réel vers le backend
+      const response = await fetch('/postuler', {
+        method: 'POST',
+        body: formDataObj
+      });
+
+      const result = await response.json();
+
+      if (result.success || response.ok) {
+        // Préparer les détails de succès
+        let detailsHTML = '';
+        detailsHTML += `<div class="detail-row"><span class="detail-label">Nom complet</span><span class="detail-value">${formDataObj.get('prenom')} ${formDataObj.get('nom')}</span></div>`;
+        detailsHTML += `<div class="detail-row"><span class="detail-label">Email</span><span class="detail-value">${formDataObj.get('email')}</span></div>`;
+        detailsHTML += `<div class="detail-row"><span class="detail-label">Téléphone</span><span class="detail-value">${formDataObj.get('telephone')}</span></div>`;
+        detailsHTML += `<div class="detail-row"><span class="detail-label">CV</span><span class="detail-value">${fileInput.files[0].name}</span></div>`;
+       
+        if (formDataObj.get('linkedin')) {
+          detailsHTML += `<div class="detail-row"><span class="detail-label">LinkedIn</span><span class="detail-value">✓</span></div>`;
+        }
+        if (formDataObj.get('portfolio')) {
+          detailsHTML += `<div class="detail-row"><span class="detail-label">Portfolio</span><span class="detail-value">✓</span></div>`;
+        }
+
+        successDetails.innerHTML = detailsHTML;
+       
+        // Afficher le succès
+        loadingOverlay.classList.remove('show');
+        document.querySelector('.form-card form').style.display = 'none';
+        document.querySelector('.progress-steps').style.display = 'none';
+        successScreen.classList.add('show');
+        successScreen.classList.add('animate-fade-in-up');
+      } else {
+        throw new Error(result.message || 'Erreur lors de l\'envoi');
+      }
+    } catch (error) {
+      console.error('Erreur:', error);
+      loadingOverlay.classList.remove('show');
+      submitBtn.disabled = false;
+     
+      alert('Une erreur est survenue lors de l\'envoi de votre candidature. Veuillez réessayer.');
+    }
+  });
+
+  // Animation initiale
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.header').classList.add('animate-fade-in-down');
+    document.querySelector('.progress-steps').classList.add('animate-fade-in');
+    document.querySelector('.form-card').classList.add('animate-fade-in-up');
+  });
+</script>
+
+</body>
+</html> 
